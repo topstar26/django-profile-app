@@ -1,0 +1,15 @@
+.list-group-item-light {
+    padding: 15px;
+    cursor: pointer;
+    border: solid 1px #e9d0d0;
+    list-style-type: none;
+    margin-top:5px;
+
+}
+.card{
+    margin:10px 0;
+}
+.content-section {
+    padding: 15px;
+    border: solid 1px #e9d0d0;
+}

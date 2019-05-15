@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="static/blog/style.css" type="text/css"> -->
+        <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+        {% if title %}
+            <title>Django-Blog - {{title}}</title>
+        {% else %}
+            <title>Django-Blog </title>
+        {% endif %}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #268df5">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <a class="navbar-brand" href="{% url 'blog-home' %}">TOPDEV</a>
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blog-home' %}">Home  </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog-about' %}">About</a>
+                    </li>
+                    
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    {% if user.is_authenticated %}
+                        <div class="nav-item">
+                            <a href="{% url 'profile' %}" class="nav-link text-dark">Profile</a>
+                         </div> 
+                        <div class="nav-item">
+                             <a href="{% url 'logout' %}" class="nav-link text-dark">Logout</a>
+                        </div>   
+                    {% else %}
+                        <div class="nav-item">
+                            <a href="{% url 'login' %}" class="nav-link text-dark">Login</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="{% url 'register' %}" class="nav-link text-dark">Register</a>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </nav>
+        </header>
+        <main rol="main" class="container ">
+            <div class="row">
+                <div class="col-md-8 pt-5">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% block content %}{% endblock%}
+                </div>
+                <div class="col-md-4 pt-5 ">
+                    <div class="content-section">
+                        <h3>Our Sidebar</h3>
+                        <p class="text-muted">You can put any jobsite feedback here you'd like to post</p>
+                            <ul class="list-group">
+                                <li class="list-group-icon list-group-item-light">Lasted Post</li>
+                                <li class="list-group-icon list-group-item-light">Announcement</li>
+                                <li class="list-group-icon list-group-item-light">Calendars</li>
+                                <li class="list-group-icon list-group-item-light">Others</li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+           
+        </main>
+       
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+    </body>
+</html>
